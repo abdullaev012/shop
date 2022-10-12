@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTE0g0EbEsJBBHeG16akSYwNz8PjUqqeVGg&usqp=CAU"
+        type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/style.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <header class="aaaa">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <a href="{% url 'main' %}">
+                            <use><i class="fa-solid fa-shop fa-2x"></i></use>
+                        </a>
+                    </svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a href="http://127.0.0.1:8000/admin/" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            </svg>
+                            Admin
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'main' %}" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'cart' %}" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            </svg>
+                            Cart
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'about_us' %}" class="nav-link text-white">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            </svg>
+                            About us
+                        </a>
+                    </li>
+                    <div class="btn-group">
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                </svg>
+                                User name: {{user}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'signOut' %}" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                </svg>
+                                Logout
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'signIn' %}" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                </svg>
+                                Sign-in
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'signUp' %}" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                                </svg>
+                                Sign-up
+                            </a>
+                        </li>
+                        {% endif %}
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div style="background-color: #d5d5d5;" class="px-3 py-2 border-bottom mb-3 bg-white">
+            <div class="container d-flex flex-wrap justify-content-center">
+                <div class="d-flex">
+                    <form class="d-flex m-2 mb-2 mb-lg-0 me-lg-auto" action="{% url 'search' %}" method="POST">
+                        {% csrf_token %}
+                        <input name="search" type="search" class="form-control" placeholder="Search..."
+                            aria-label="Search">
+                        <button type="submit" class="ms-2 btn btn-primary send">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    <div style="margin-top: 40px; height: 350px;" class="bg-dark text-secondary px-4 py-5 text-center">
+        <div style="margin: -55px 0 0 0;" class="py-5">
+            <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                    world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
+                    responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom
+                        button</button>
+                    <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

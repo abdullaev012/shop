@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} search {% endblock %}
+{% block content %}
+
+<div class="d-flex">
+    {% for z in product %}
+    <div class="card">
+        <a href="{% url 'more' id=z.id %}"><img src="{{z.image.url}}" class="card-img-top img" alt=""></a>
+        <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'more' id=z.id %}" class="more">{{z.title}}</a></h5>
+            <p class="card-text"><a class="more" href="{% url 'more' id=z.id %}">{{z.description}}</a></p>
+            <div class="between">
+                <a href="#" class="btn btn-primary">{{z.price}} $</a>
+                <a href="{% url 'addCart' pk=z.id %}" class="m-2 btn btn-primary">Add to cart</a>
+                <a href="{% url 'more' id=z.id %}" class="m-2 btn btn-primary">More</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
